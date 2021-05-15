@@ -22,7 +22,7 @@ function buildTable(datetime, city, state, country, shape, durationMinutes, comm
     var table = d3.select("#ufo-table");
     var tbody = table.select("tbody");
     var trow;
-    for (var i = 0; i < 50; i++) {
+    for (var i = 0; i < datetime.length; i++) {
       trow = tbody.append("tr");
       trow.append("td").text(datetime[i]);
       trow.append("td").text(city[i])
@@ -72,13 +72,23 @@ function GetDate() {
 
 function SearchDate (DateToSearch) {
     console.log("filterUFOdata commence " + DateToSearch);
-    FilteredList = tableData.filter(ReturnMatchingDates);
-    console.log(FilteredList)
+    DateFilteredUFOList = tableData.filter(ReturnMatchingDates);
+    console.log(DateFilteredUFOList)
+    DeteleTable()
+    CreateUFOTable(DateFilteredUFOList)
 };
 
-function ReturnMatchingDates(something) {
-    return something.datetime === date;
+function ReturnMatchingDates(row) {
+    return row.datetime === date;
 };
+
+function DeteleTable() {
+    for(var i = document.getElementById("ufo-table").rows.length; i > 1;i--) {
+        document.getElementById("ufo-table").deleteRow(i -1);
+    }
+};
+
+// function BuildNewTable (inputData)
 
 // filtered2.forEach(thing => {
 //     console.log(thing.city)
