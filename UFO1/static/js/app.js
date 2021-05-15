@@ -41,12 +41,48 @@ function buildTable(datetime, city, state, country, shape, durationMinutes, comm
 
 var FilterButton = d3.select("#filter-btn");
 
-FilterButton.on("click", function() {
-    var FilterDate = d3.select("#datetime").value;
-    console.log(FilterDate)
-    console.log("click!")
-});
+// FilterButton.on("click", function() {
+//     var FilterDate = d3.select("#datetime").value;
+//     console.log(FilterDate)
+//     console.log("click!")
+// });
 
+// function GetDate() {
+//     var datefield = document.getElementById("form1")
+//     var text = "";
+//     var i;
+//     for (i = 0; i < datefield.length ;i++) {
+//       text += datefield.elements[i].value;
+//       console.log(text)
+//     }
+// }
+
+var date = ""
+
+function GetDate() {
+    date = document.getElementById("form1").elements[0].value;
+    console.log(date)
+    SearchDate(date)
+}
+
+
+
+// var filtered1 = tableData.filter(filterUFOdata)
+// var filtered2 = filtered1.map(blah => blah.date)
+
+function SearchDate (DateToSearch) {
+    console.log("filterUFOdata commence " + DateToSearch);
+    FilteredList = tableData.filter(ReturnMatchingDates);
+    console.log(FilteredList)
+};
+
+function ReturnMatchingDates(something) {
+    return something.datetime === date;
+};
+
+// filtered2.forEach(thing => {
+//     console.log(thing.city)
+// });
 
 CreateUFOTable(tableData)
 
